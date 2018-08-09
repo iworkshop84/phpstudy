@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Третий урок - ДЗ</title>
+    <title>Четвёртый урок - ДЗ</title>
 </head>
 <body>
 
@@ -17,82 +17,59 @@ echo '<h2>Задание 1</h2>';
 echo '<hr><br />';
 
 /*
-С помощью цикла while выведите все числа от 1 до 100 нацело делящиеся на 3
-*/
-
-$i = 1;
-
-while ($i < 100){
-  if (0 == $i % 3){
-      echo $i . '<br />';
-  }
-    $i++;
-}
-
-echo '<h2>Задание 2</h2>';
-echo '<hr><br />';
-/*
-Напишите функцию которая создаст массив из n случайных чисел и возвращает его в отсортированном
-по убыванию порядке
+Создайте свой калькулятор. Он должен состоять из двух полей для ввода чисел, а между ними select для выбора операции.
+По нажатию на кнопку "=" должно вычисляться значение.
  */
 
-function arrSort($n){
+$operations = ['+', '-', '*', '/', '%', '**'];
 
-    $i = 1;
-    while ($i <= $n){
-       $nArray[] = random_int(-1000000,1000000);
-       $i++;
-    }
-    rsort($nArray);
-    return $nArray;
+
+
+if(!empty($_POST)){
+    $res = calc($_POST['fnumber'], $_POST['snumber'], $_POST['operation']);
 }
-
-var_dump(arrSort(10));
-
-
-echo '<h2>Задание 3</h2>';
-echo '<hr><br />';
-
-/*
-Создайте массив в котором ключи  - названия регионов, значения  - массивы городов входящих в этот регион.
-Выведите на экран примерно в таком виде
-Московская область
-- Москва
-- Реутов
-Ярославская область
-- Ярославль
-- Рыбинск
- */
-
-$arrReg  = ['Московская область' => ['Москва', 'Реутов', 'Балашиха', 'Домодедово'],
-            'Ярославская область' => ['Ярославль', 'Рыбинск', 'Тутаев'],
-            'Челябинская область' => ['Челябинск', 'Аша', 'Златоуст']];
-
-
-//var_dump($arrReg);
-
-
-foreach ($arrReg as $key=>$val){
-    echo '<ul>' . $key . '</ul>';
-    if(is_array($val)){
-        foreach ($val as $key1=>$val1){
-            echo '<li type="circle">' . $val1 . '</li>';
-        }
-    }
-}
-
-echo '<h2>Задание 3 - вариант 2</h2>';
-echo '<hr><br />';
 ?>
 
-<?php foreach ($arrReg as $key=>$val): ?>
-  <?= '<ul>' . $key . '</ul>'; ?>
-    <?php if(is_array($val)): ?>
-        <?php foreach ($val as $key1=>$val1): ?>
-            <?= '<li type="circle">' . $val1 . '</li>'; ?>
-        <?php endforeach;?>
-    <?php endif;?>
-<?php endforeach; ?>
+
+<form action="/index.php" method="post">
+    <fieldset>
+        <legend>Калькулятор</legend>
+        <p>
+          <input type="text" name="fnumber" placeholder="Первое число" size="30px" value=
+          "<?php
+          if(isset($_POST['fnumber'])){
+              echo $_POST['fnumber'];
+          }
+          ?>">
+            <select name="operation">
+                <?php foreach ($operations as $key=>$value): ?>
+                <option
+                    <?php
+                    if(isset($_POST['operation']) && ($_POST['operation']) == $value){
+                        echo 'selected';
+                    }
+                    ?>
+                ><?= $value; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <input type="text" name="snumber" placeholder="Второе число" size="30px" value=
+            "<?php
+            if(isset($_POST['snumber'])){
+                echo $_POST['snumber'];
+            }
+            ?>">
+            <input type="submit" value="=">
+
+            <?php
+            if(isset($res)){
+                echo $res;
+            }
+            ?>
+        </p>
+    </fieldset>
+
+</form>
+
 
 
 </body>
