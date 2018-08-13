@@ -1,0 +1,41 @@
+body {
+    color: #4c4c4c;
+    font: 12px/18px Arial;
+    text-align: left;
+}
+
+a {
+    color: #1773da;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #3990f1;
+    text-decoration: none;
+}
+
+#wraper {
+    text-align: left;
+    margin: 0 auto;
+    width: 1000px;
+    border: 1px solid #C4C4C4;
+    box-shadow: 0 1px 5px #D3D3D3;
+
+}
+
+#posts {
+    display: inline-block;
+    float: left;
+    width: 700px;
+    padding: 20px;
+    margin: 2px auto;
+    background-color: #fff9e6;
+    box-shadow: 0 1px 5px #D3D3D3;
+}
+
+#rightsidebar{
+    float: left;
+    width: 220px;
+    padding: 17px 0 0 15px;
+
+}
