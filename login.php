@@ -1,42 +1,28 @@
 <?php
 require __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
 session_start();
-
 if(isset($_POST['logsite'])){
     if(!empty($_POST['login']) && !empty($_POST['password'])){
-
         $res = autoris($_POST['login'], $_POST['password']);
     }else{
         $res = 'Введите логин и пароль';
     }
 }
-
 if(isset($_GET['register']) && $_GET['register'] == 'yes') {
-
     if (isset($_POST['regsite'])) {
         if (!empty($_POST['rlogin']) && !empty($_POST['rpassword'])) {
-
             file_put_contents('users.txt',
-                                trim($_POST['rlogin']) . '~^~' . trim($_POST['rpassword']) . PHP_EOL,
-                                FILE_APPEND | LOCK_EX);
+                trim($_POST['rlogin']) . '~^~' . trim($_POST['rpassword']) . PHP_EOL,
+                FILE_APPEND | LOCK_EX);
             header('Location: http://mysite.loc/login.php');
             exit;
-
         } else {
             $res = 'Введите логин и пароль';
         }
     }
 }
 
-function logaut(){
-    if(isset($_GET['logaut']) && $_GET['logaut'] = 'yes'){
-        session_destroy();
-        header('Location: http://mysite.loc/');
-        exit;
-    }
-}
-
-logaut();
+    logaut();
 ?>
 
 <!doctype html>
@@ -98,5 +84,3 @@ logaut();
 </div>
 </body>
 </html>
-
-
